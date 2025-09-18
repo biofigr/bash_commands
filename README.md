@@ -154,8 +154,7 @@ Covers navigation, file management, compression, search/replace, scripting, job 
 ---
 
 ## Automating with Loops
-
-- **Basic loop for files**  
+**Basic loop for files**  
 
 - `for file in *.fastq.gz; do echo "Processing $file"; done`
 
@@ -166,8 +165,7 @@ Covers navigation, file management, compression, search/replace, scripting, job 
 ---
 
 ## Writing Basic Bash Scripts
-
-  -- Template: create a script.sh file that finds R2 for each R1 and run command
+**Template: create a script.sh file that finds R2 for each R1 and run command**
 
 ```
 #!/bin/bash
@@ -179,12 +177,12 @@ for r1 in *R1*.fastq.gz; do
   # Example: run fastqc
   fastqc $r1 $r2 -o ./qc_reports/
 done
+```
 
   -- Save the file and make it executable:
 
 - chmod +x myscript.sh
 - ./myscript.sh
-```
 
 ---
 
@@ -222,7 +220,6 @@ samtools view -b aligned.sam > aligned.bam
 ```
 
 **Commands:**
-
   -- `sbatch my_job.sh` = submit job
   -- `squeue -u <username>` = check jobs
   -- `scancel <jobID>` = cancel job
@@ -230,6 +227,7 @@ samtools view -b aligned.sam > aligned.bam
 ---
 
 ## Running Pipelines (nf-core / Nextflow)
+**nf-core is the Gold-Standard of reproducible bioinformatics pipelines**
 
 - `nextflow run nf-core/rnaseq -profile conda`
 - `nextflow run nf-core/sarek -profile docker`

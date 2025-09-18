@@ -156,19 +156,12 @@ Covers navigation, file management, compression, search/replace, scripting, job 
 ## Automating with Loops
 
 - **Basic loop for files**  
-```bash
-for file in *.fastq.gz; do
-  echo "Processing $file"
-done
-```
 
----
+- `for file in *.fastq.gz; do echo "Processing $file"; done`
 
-## Writing Basic Bash Loop
+- `for r1 in *R1*.fastq.gz; do r2=${r1/_R1/_R2}; echo "Paired reads: $r1 and $r2"; done`
 
-- for r1 in *R1*.fastq.gz; do r2=${r1/_R1/_R2}; echo "Paired reads: $r1 and $r2"; done
-
-- bash -c "for r1 in *R1*.fastq.gz; do r2=${r1/_R1/_R2}; echo "Paired reads: $r1 and $r2"; done" &
+- `nohup bash -c "for r1 in *R1*.fastq.gz; do r2=${r1/_R1/_R2}; echo "Paired reads: $r1 and $r2"; done" &`
 
 ---
 
@@ -176,6 +169,7 @@ done
 
   -- Template: create a script.sh file that finds R2 for each R1 and run command
 
+```
 #!/bin/bash
 
 for r1 in *R1*.fastq.gz; do
@@ -190,6 +184,7 @@ done
 
 - chmod +x myscript.sh
 - ./myscript.sh
+```
 
 ---
 
@@ -209,7 +204,7 @@ done
 **SLURM is a job scheduler for HPCs. You write a script (.sh) and submit it.**
 
   -- Example my_job.sh:
-
+```
 #!/bin/bash
 #SBATCH --job-name=MyAlignment
 #SBATCH --nodes=1
@@ -224,30 +219,31 @@ module load bwa
 
 bwa mem genome.fa reads_R1.fq.gz reads_R2.fq.gz > aligned.sam
 samtools view -b aligned.sam > aligned.bam
+```
 
 **Commands:**
 
-  -- sbatch my_job.sh = submit job
-  -- squeue -u <username> = check jobs
-  -- scancel <jobID> = cancel job
+  -- `sbatch my_job.sh` = submit job
+  -- `squeue -u <username>` = check jobs
+  -- `scancel <jobID>` = cancel job
 
 ---
 
 ## Running Pipelines (nf-core / Nextflow)
 
-- nextflow run nf-core/rnaseq -profile conda
-- nextflow run nf-core/sarek -profile docker
-- nextflow pull nf-core/<pipeline> = update pipeline
-- nextflow -version = check installation
+- `nextflow run nf-core/rnaseq -profile conda`
+- `nextflow run nf-core/sarek -profile docker`
+- `nextflow pull nf-core/<pipeline> = update pipeline`
+- `nextflow -version = check installation`
 
 ---
 
 ## Useful Shortcuts
 
-- CTRL + C = stop process
-- CTRL + Z = suspend process
-- !! = repeat last command
-- history = show command history
-- !123 = rerun command number 123 from history
-- tab = autocomplete file or command
-- clear = clear terminal screen
+- `CTRL + C` = stop process
+- `CTRL + Z` = suspend process
+- `!!` = repeat last command
+- `history` = show command history
+- `!123` = rerun command number 123 from history
+- `tab` = autocomplete file or command
+- `clear` = clear terminal screen
